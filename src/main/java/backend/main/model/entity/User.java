@@ -1,7 +1,6 @@
-package backend.main.model;
+package backend.main.model.entity;
 
 import jakarta.persistence.*;
 
-@Entity
 public class User {
 }
