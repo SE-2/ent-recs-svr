@@ -1,4 +1,4 @@
 package backend.main.repository;
 
-public class UserRepository {
+public interface UserRepository {
 }
