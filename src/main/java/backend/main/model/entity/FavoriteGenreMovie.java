@@ -12,9 +12,9 @@ import lombok.*;
 @Builder
 public class FavoriteGenreMovie {
     @Id
-    private String UserID;
+    private String userID;
     @Column
-    private String Genre;
+    private String genre;
     @Column
-    private double Rate;
+    private double rate;
 }

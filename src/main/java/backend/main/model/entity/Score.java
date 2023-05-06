@@ -12,11 +12,11 @@ import lombok.*;
 @Builder
 public class Score {
     @Id
-    private String UserID;
+    private String userID;
     @Column
-    private double Grade;
+    private double grade;
     @Column
-    private String ItemID;
+    private String itemID;
     @Column
-    private String Date;
+    private String date;
 }

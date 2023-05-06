@@ -12,13 +12,13 @@ import lombok.*;
 @Builder
 public class Playlists {
     @Id
-    private String PlaylistID;
+    private String playlistID;
     @Column
-    private String UserID;
+    private String userID;
     @Column
-    private String Name;
+    private String name;
     @Column
-    private String CreationDate;
+    private String creationDate;
     @Column
-    private String LastVisitedItemID;
+    private String lastVisitedItemID;
 }

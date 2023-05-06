@@ -3,7 +3,6 @@ package backend.main.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
 
 @Setter
 @Getter
@@ -14,11 +13,11 @@ import java.util.Set;
 @Builder
 public class User {
     @Id
-    private String ID;
+    private String id;
     @Column
-    private String Email;
+    private String email;
     @Column
-    private String Token;
+    private String token;
     @Column
-    private String BirthDate;
+    private String birthDate;
 }

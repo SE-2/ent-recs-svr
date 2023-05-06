@@ -12,13 +12,13 @@ import lombok.*;
 @Builder
 public class Feedback {
     @Id
-    private String UserID;
+    private String userID;
     @Column
-    private String Type;
+    private String type;
     @Column
-    private String Description;
+    private String description;
     @Column
-    private boolean Checked;
+    private boolean checked;
     @Column
-    private int Priority;
+    private int priority;
 }

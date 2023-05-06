@@ -12,9 +12,9 @@ import lombok.*;
 @Builder
 public class UserBlackList {
     @Id
-    private String PlaylistID;
+    private String playlistID;
     @Column
-    private String ItemID;
+    private String itemID;
     @Column
-    private String Date;
+    private String date;
 }
