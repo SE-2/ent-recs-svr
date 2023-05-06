@@ -7,14 +7,14 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "FavoriteGenreMovie")
+@Table(name = "FavoritePodcastProducer")
 @Entity
 @Builder
-public class FavoriteGenreMovie {
+public class FavoritePodcastProducer {
     @Id
     private String userID;
     @Column
-    private String genre;
+    private String name;
     @Column
     private double rate;
 }
