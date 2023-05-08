@@ -26,13 +26,11 @@ public class PodcastService {
             List<Podcast> dataModels = new ArrayList<>();
             reader.skip(1);
             while ((line = reader.readNext()) != null) {
-                // Split the CSV line into individual values
 
-                // Create a new instance of your data model
                 Podcast podcast = new Podcast();
                 if (checkValidation(line))
                     continue;
-                // Set the values from the CSV to the corresponding fields in your data model
+
                 podcast.setTitle(line[0]);
                 podcast.setProducer(line[1]);
                 podcast.setGenre(line[2]);
@@ -46,7 +44,6 @@ public class PodcastService {
                 dataModels.add(podcast);
             }
 
-            // Save the data models to Elasticsearch using the repository
             podcastRepository.saveAll(dataModels);
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
