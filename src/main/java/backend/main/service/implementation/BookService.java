@@ -3,23 +3,20 @@ package backend.main.service.implementation;
 
 import backend.main.model.entity.Book;
 import backend.main.repository.BookRepository;
+import backend.main.service.interfaces.IBookService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
-public class BookService {
+public class BookService implements IBookService {
     private final BookRepository bookRepository;
-
-    @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     public void importDataFromCSV(MultipartFile file) {
         try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {

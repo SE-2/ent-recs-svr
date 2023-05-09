@@ -3,25 +3,23 @@ package backend.main.service.implementation;
 
 import backend.main.model.entity.Music;
 import backend.main.repository.MusicRepository;
+import backend.main.service.interfaces.IMusicService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
-public class MusicService {
+public class MusicService implements IMusicService {
 
     private final MusicRepository musicRepository;
 
-    @Autowired
-    public MusicService(MusicRepository musicRepository) {
-        this.musicRepository = musicRepository;
-    }
-
+    @Override
     public void importDataFromCSV(MultipartFile file) {
         try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {
             String[] line;

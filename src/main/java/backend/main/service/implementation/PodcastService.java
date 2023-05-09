@@ -2,23 +2,20 @@ package backend.main.service.implementation;
 
 import backend.main.model.entity.Podcast;
 import backend.main.repository.PodcastRepository;
+import backend.main.service.interfaces.IPodcastService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
-public class PodcastService {
+public class PodcastService implements IPodcastService {
     private final PodcastRepository podcastRepository;
-
-    @Autowired
-    public PodcastService(PodcastRepository podcastRepository) {
-        this.podcastRepository = podcastRepository;
-    }
 
     public void importDataFromCSV(MultipartFile file) {
         try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {

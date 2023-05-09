@@ -1,6 +1,6 @@
 package backend.main.controller;
 
-import backend.main.service.implementation.BookService;
+import backend.main.service.interfaces.IBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 public class BookController {
-    private final BookService bookService;
+    private final IBookService bookService;
 
     @PostMapping("/importBook")
     public ResponseEntity<String> importData(@RequestParam("book") MultipartFile file) {

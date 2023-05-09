@@ -1,6 +1,6 @@
 package backend.main.controller;
 
-import backend.main.service.implementation.MovieService;
+import backend.main.service.interfaces.IMovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 public class MovieController {
-    private final MovieService movieService;
+    private final IMovieService movieService;
 
     @PostMapping("/importMovie")
     public ResponseEntity<String> importData(@RequestParam("movie") MultipartFile file) {
