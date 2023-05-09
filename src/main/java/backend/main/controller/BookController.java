@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BookController {
     private final IBookService bookService;
 
-    @PostMapping("/importBook")
+    @PostMapping("/books")
     public ResponseEntity<String> importData(@RequestParam("book") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");

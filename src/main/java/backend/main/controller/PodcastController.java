@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PodcastController {
     private final IPodcastService podcastService;
 
-    @PostMapping("/importPodcast")
+    @PostMapping("/podcasts")
     public ResponseEntity<String> importData(@RequestParam("podcast") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");

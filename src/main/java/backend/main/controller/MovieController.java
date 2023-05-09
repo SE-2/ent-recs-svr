@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MovieController {
     private final IMovieService movieService;
 
-    @PostMapping("/importMovie")
+    @PostMapping("/movies")
     public ResponseEntity<String> importData(@RequestParam("movie") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");
