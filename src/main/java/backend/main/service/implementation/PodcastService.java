@@ -1,9 +1,9 @@
 package backend.main.service.implementation;
 
+import backend.main.Interfaces.IFileParser;
+import backend.main.Interfaces.IPodcastDeserializer;
 import backend.main.model.entity.Podcast;
 import backend.main.repository.PodcastRepository;
-import backend.main.service.interfaces.IPodcastService;
-import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,43 +14,18 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
-public class PodcastService implements IPodcastService {
+public class PodcastService {
+    private final IFileParser fileParser;
+    private final IPodcastDeserializer podcastDeserializer;
     private final PodcastRepository podcastRepository;
 
     public void importDataFromCSV(MultipartFile file) {
-        try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {
-            String[] line;
-            List<Podcast> dataModels = new ArrayList<>();
-            reader.skip(1);
-            while ((line = reader.readNext()) != null) {
-
-                Podcast podcast = new Podcast();
-                if (checkValidation(line))
-                    continue;
-
-                podcast.setTitle(line[0]);
-                podcast.setProducer(line[1]);
-                podcast.setGenre(line[2]);
-                podcast.setDescription(line[3]);
-                podcast.setNum_episodes(Integer.parseInt(line[4]));
-                podcast.setRating(Float.parseFloat(line[5]));
-                podcast.setNum_reviews(Integer.parseInt(line[6]));
-                podcast.setLink(line[7]);
-                podcast.setId(line[8]);
-
-                dataModels.add(podcast);
-            }
-
-            podcastRepository.saveAll(dataModels);
+        try {
+            List<String[]> lines = fileParser.parse(file);
+            List<Podcast> podcasts = podcastDeserializer.deserialize(lines);
+            podcastRepository.saveAll(podcasts);
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean checkValidation(String[] value) {
-        for (String a : value)
-            if (a.equals("NA"))
-                return true;
-        return false;
     }
 }
