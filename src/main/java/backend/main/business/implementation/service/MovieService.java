@@ -2,6 +2,7 @@ package backend.main.business.implementation.service;
 
 import backend.main.business.interfaces.parser.IFileParser;
 import backend.main.business.interfaces.deserializer.IMovieDeserializer;
+import backend.main.business.interfaces.service.IMovieService;
 import backend.main.model.entity.Movie;
 import backend.main.repository.MovieRepository;
 import com.opencsv.exceptions.CsvValidationException;
@@ -14,7 +15,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
-public class MovieService {
+public class MovieService implements IMovieService {
     private final IFileParser fileParser;
     private final IMovieDeserializer movieDeserializer;
     private final MovieRepository movieRepository;

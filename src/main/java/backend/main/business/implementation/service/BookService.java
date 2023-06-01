@@ -2,6 +2,7 @@ package backend.main.business.implementation.service;
 
 
 import backend.main.business.interfaces.deserializer.IBookDeserializer;
+import backend.main.business.interfaces.service.IBookService;
 import backend.main.model.entity.Book;
 import backend.main.repository.BookRepository;
 import backend.main.business.interfaces.parser.IFileParser;
@@ -15,7 +16,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
-public class BookService {
+public class BookService implements IBookService {
     private final IFileParser fileParser;
     private final IBookDeserializer bookDeserializer;
     private final BookRepository bookRepository;
