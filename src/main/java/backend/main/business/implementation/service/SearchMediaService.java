@@ -1,7 +1,7 @@
 package backend.main.business.implementation.service;
 
 import backend.main.business.interfaces.metadataConvertor.*;
-import backend.main.business.interfaces.service.IMediaMetadataService;
+import backend.main.business.interfaces.service.ISearchMediaService;
 import backend.main.model.dto.*;
 import backend.main.model.entity.*;
 import backend.main.repository.BookRepository;
@@ -15,7 +15,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
-public class MediaMetadataService implements IMediaMetadataService {
+public class SearchMediaService implements ISearchMediaService {
     private final IBookToMetadataConvertor BookConvertor;
     private final IMovieToMetadataConvertor MovieConvertor;
     private final IMusicToMetadataConvertor MusicConvertor;

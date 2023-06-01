@@ -1,7 +1,6 @@
 package backend.main.controller;
 
-import backend.main.business.interfaces.service.IMediaMetadataService;
-import backend.main.business.interfaces.service.IMovieService;
+import backend.main.business.interfaces.service.ISearchMediaService;
 import backend.main.model.dto.SearchQuery;
 import backend.main.model.entity.MediaMetadata;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +12,11 @@ import java.util.*;
 @RestController
 @RequiredArgsConstructor
 public class MediaMetadataController {
-    private final IMediaMetadataService mediaMetadataService;
+    private final ISearchMediaService searchMediaService;
 
     @PostMapping("/search")
     public ResponseEntity<List<MediaMetadata>> search(@RequestBody SearchQuery searchQuery) {
-        List<MediaMetadata> searchResults = mediaMetadataService.getMediaMetadata(searchQuery);
+        List<MediaMetadata> searchResults = searchMediaService.getMediaMetadata(searchQuery);
         return ResponseEntity.ok(searchResults);
     }
 }

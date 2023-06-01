@@ -5,6 +5,6 @@ import backend.main.model.entity.MediaMetadata;
 
 import java.util.List;
 
-public interface IMediaMetadataService {
+public interface ISearchMediaService {
     List<MediaMetadata> getMediaMetadata(SearchQuery searchQuery);
 }
