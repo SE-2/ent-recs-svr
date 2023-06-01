@@ -1,6 +1,6 @@
 package backend.main.controller;
 
-import backend.main.service.interfaces.IMovieService;
+import backend.main.business.interfaces.service.IMovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

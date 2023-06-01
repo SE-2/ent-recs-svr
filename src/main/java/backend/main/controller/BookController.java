@@ -1,6 +1,6 @@
 package backend.main.controller;
 
-import backend.main.service.interfaces.IBookService;
+import backend.main.business.interfaces.service.IBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
