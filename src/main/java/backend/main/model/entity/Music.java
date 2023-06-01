@@ -93,4 +93,7 @@ public class Music {
 
     @Field(type = FieldType.Text, name = "stream")
     private String stream;
+
+    @Field(type = FieldType.Text, name = "image_url")
+    private String imageUrl;
 }
