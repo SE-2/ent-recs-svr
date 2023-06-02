@@ -14,7 +14,7 @@ public class LikeController {
     private final ILikeService likeService;
 
     @PatchMapping("/like/{mediaId}")
-    public ResponseEntity<Integer> likeMedia(@RequestHeader("token")String token, @PathVariable String mediaId) {
+    public ResponseEntity<Integer> likeMedia(@RequestHeader("Token")String token, @PathVariable String mediaId) {
         int likesCount = likeService.likeMedia(mediaId,token);
         return ResponseEntity.ok(likesCount);
 
