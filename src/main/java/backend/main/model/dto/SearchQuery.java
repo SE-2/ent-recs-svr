@@ -12,4 +12,5 @@ import lombok.Setter;
 public class SearchQuery {
     private String query;
     private MediaFilter filter;
+    private String userToken;
 }

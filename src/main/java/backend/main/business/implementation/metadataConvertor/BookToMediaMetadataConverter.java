@@ -1,10 +1,8 @@
 package backend.main.business.implementation.metadataConvertor;
 
 import backend.main.business.interfaces.metadataConvertor.IBookToMetadataConvertor;
-import backend.main.model.dto.SearchQuery;
 import backend.main.model.entity.Book;
 import backend.main.model.entity.MediaMetadata;
-import backend.main.repository.BookRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
