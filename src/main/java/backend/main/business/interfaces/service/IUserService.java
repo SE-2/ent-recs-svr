@@ -1,7 +1,7 @@
 package backend.main.business.interfaces.service;
 
-import backend.main.model.entity.User;
+import backend.main.model.dto.UserAddDto;
 
 public interface IUserService {
-    void createUser(User user);
+    String createUser(UserAddDto user);
 }
