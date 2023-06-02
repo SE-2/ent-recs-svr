@@ -18,9 +18,9 @@ public class LikeService implements ILikeService {
 
     @Override
     public int likeMedia(String mediaId, String token) {
-        User user = userRepository.findByToken(token);
+        String userID = findUserID(token);
         Like like = Like.builder()
-                .userID(user.getId())
+                .userID(userID)
                 .mediaId(mediaId)
                 .date(LocalDateTime.now().toString())
                 .build();
@@ -28,5 +28,10 @@ public class LikeService implements ILikeService {
         likeRepository.save(like);
 
         return likeRepository.countByMediaId(mediaId);
+    }
+
+    public String findUserID(String token) {
+        User user = userRepository.findByToken(token);
+        return user.getId();
     }
 }
