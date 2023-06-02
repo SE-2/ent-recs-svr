@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -31,7 +30,7 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
             allWriters.add(book.getName());
         }
         for (String genre : allGenres) {
-            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIdAndGenre(user.getId(),genre)
+            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(),genre)
                     .orElse(new FavoriteGenreBook(user.getId(), "", 0.0));
 
             favoriteGenreBook.setRate(favoriteGenreBook.getRate() + 1);

@@ -30,4 +30,9 @@ public class MusicService implements IMusicService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Optional<Music> findMusic(String id) {
+        return musicRepository.findById(id);
+    }
 }
