@@ -1,6 +1,7 @@
 
 package backend.main.repository;
 
+import backend.main.model.entity.Book;
 import backend.main.model.entity.Movie;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -14,4 +15,6 @@ public interface MovieRepository extends ElasticsearchRepository<Movie, String> 
 
     @Query("{\"bool\": {\"must\": [{\"multi_match\": {\"query\": \"?0\", \"type\": \"best_fields\"}}]}}")
     List<Movie> searchMoviesWithoutFilter(String query, String filter);
+
+    List<Movie> findAllById(List<String>Ids);
 }

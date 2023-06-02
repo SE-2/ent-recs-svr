@@ -1,7 +1,9 @@
 package backend.main.model.dto;
 
-import java.util.Map;
+import lombok.AllArgsConstructor;
 
+import java.util.Map;
+@AllArgsConstructor
 public class RecommendationRequest {
     MediaType mediaType;
 

@@ -4,9 +4,11 @@ import backend.main.model.entity.*;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface FavoritePodcastProducerRepository extends CrudRepository<FavoritePodcastProducer, String>  {
-    Optional<FavoritePodcastProducer>findByUserIDAndProducer(String id, String producer);
+    Optional<FavoritePodcastProducer>findByUserIDAndPodcastProducer(String id, String producer);
+    List<FavoritePodcastProducer> findByUserID(String userId);
 }
