@@ -35,7 +35,7 @@ public class FavoritePodcastUpdater implements IFavoritePodcastUpdater {
         }
 
         for (String producer : allProducers) {
-            FavoritePodcastProducer favoritePodcastProducer = favoritePodcastProducerRepository.findByUserIDAndProducer(user.getId(), producer)
+            FavoritePodcastProducer favoritePodcastProducer = favoritePodcastProducerRepository.findByUserIDAndPodcastProducer(user.getId(), producer)
                     .orElse(new FavoritePodcastProducer(user.getId(), producer, 0.0));
 
             favoritePodcastProducer.setRate(favoritePodcastProducer.getRate() + 1);

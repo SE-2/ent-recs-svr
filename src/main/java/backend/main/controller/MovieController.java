@@ -1,13 +1,14 @@
 package backend.main.controller;
 
 import backend.main.business.interfaces.service.IMovieService;
-import backend.main.model.entity.Book;
 import backend.main.model.entity.Movie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +25,12 @@ public class MovieController {
 
     @GetMapping("/movie/{movieId}")
     public ResponseEntity<Movie> getMovie(@PathVariable String movieId) {
-        return ResponseEntity.ok(new Movie());
+        Optional<Movie> optionalMovie = movieService.findMovie(movieId);
+        if (optionalMovie.isPresent()) {
+            Movie movie = optionalMovie.get();
+            return ResponseEntity.ok(movie);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
