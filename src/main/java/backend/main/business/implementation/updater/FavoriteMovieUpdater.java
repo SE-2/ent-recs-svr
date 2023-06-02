@@ -37,7 +37,7 @@ public class FavoriteMovieUpdater implements IFavoriteMovieUpdater {
         }
 
         for (String genre : allGenres) {
-            FavoriteGenreMovie favoriteGenreMovie = favoriteGenreMovieRepository.findFavoriteGenreMovieByUserIDAndGenre(user.getId(), genre)
+            FavoriteGenreMovie favoriteGenreMovie = favoriteGenreMovieRepository.findByUserIDAndGenre(user.getId(), genre)
                     .orElse(new FavoriteGenreMovie(user.getId(), genre, 0.0));
 
             favoriteGenreMovie.setRate(favoriteGenreMovie.getRate() + 1);

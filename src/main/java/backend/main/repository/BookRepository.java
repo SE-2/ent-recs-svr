@@ -14,4 +14,6 @@ public interface BookRepository extends ElasticsearchRepository<Book, String> {
 
     @Query("{\"bool\": {\"must\": [{\"multi_match\": {\"query\": \"?0\", \"type\": \"best_fields\"}}]}}")
     List<Book> searchBooksWithoutFilter(String query, String filter);
+
+    List<Book> findAllById(List<String>Ids);
 }

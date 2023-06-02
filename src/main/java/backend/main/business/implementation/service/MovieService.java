@@ -29,4 +29,9 @@ public class MovieService implements IMovieService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Optional<Movie> findMovie(String id) {
+        return movieRepository.findById(id);
+    }
 }
