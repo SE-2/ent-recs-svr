@@ -19,6 +19,7 @@ public class UserController {
         User user = User.builder()
                 .email(userDto.getEmail())
                 .birthDate(userDto.getBirthDate())
+                .token(userDto.getToken())
                 .build();
 
         try {

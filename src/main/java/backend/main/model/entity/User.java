@@ -12,6 +12,7 @@ import lombok.*;
 @Entity
 @Builder
 public class User {
+    @GeneratedValue(strategy=GenerationType.UUID)
     @Id
     private String id;
     @Column

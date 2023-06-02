@@ -14,19 +14,6 @@ public class UserService implements IUserService {
 
     @Override
     public void createUser(User user) {
-        String id = generateUniqueId();
-        user.setId(id);
-        user.setToken(generateRandomToken());
         userRepository.save(user);
-    }
-
-    private String generateUniqueId() {
-        // TODO
-        return "1111";
-    }
-
-    private String generateRandomToken() {
-        // TODO
-        return "sdhaigd8392";
     }
 }
