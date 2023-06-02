@@ -1,5 +1,6 @@
 package backend.main.repository;
 
+import backend.main.model.entity.Book;
 import backend.main.model.entity.Podcast;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -15,5 +16,7 @@ public interface PodcastRepository extends ElasticsearchRepository<Podcast, Stri
 
     @Query("{\"bool\": {\"must\": [{\"multi_match\": {\"query\": \"?0\", \"type\": \"best_fields\"}}]}}")
     List<Podcast> searchPodcastsWithoutFilter(String query, String filter);
+
+    List<Podcast> findAllById(List<String>Ids);
 
 }
