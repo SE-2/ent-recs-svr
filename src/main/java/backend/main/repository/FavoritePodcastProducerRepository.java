@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FavoritePodcastProducerRepository extends CrudRepository<FavoritePodcastProducer, String>  {
-    Optional<FavoritePodcastProducer>findByUserIDAndProducer(String id, String producer);
+    Optional<FavoritePodcastProducer>findByUserIDAndPodcastProducer(String id, String producer);
 }

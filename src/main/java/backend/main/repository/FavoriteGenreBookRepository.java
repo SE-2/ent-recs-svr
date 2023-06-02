@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FavoriteGenreBookRepository extends CrudRepository<FavoriteGenreBook, String> {
-    Optional<FavoriteGenreBook> findByUserIdAndGenre(String id, String genre);
+    Optional<FavoriteGenreBook> findByUserIDAndGenre(String id, String genre);
 }

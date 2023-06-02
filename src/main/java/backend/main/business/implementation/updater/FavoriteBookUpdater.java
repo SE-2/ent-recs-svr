@@ -31,7 +31,7 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
             allWriters.add(book.getName());
         }
         for (String genre : allGenres) {
-            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIdAndGenre(user.getId(),genre)
+            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(),genre)
                     .orElse(new FavoriteGenreBook(user.getId(), "", 0.0));
 
             favoriteGenreBook.setRate(favoriteGenreBook.getRate() + 1);
