@@ -7,16 +7,14 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Score")
+@Table(name = "Like")
 @Entity
 @Builder
-public class Score {
+public class Like {
     @Id
     private String userID;
     @Column
-    private double grade;
-    @Column
-    private String itemID;
+    private String mediaId;
     @Column
     private String date;
 }
