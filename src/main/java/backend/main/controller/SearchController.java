@@ -6,6 +6,8 @@ import backend.main.model.dto.MediaFilter;
 import backend.main.model.dto.MediaType;
 import backend.main.model.dto.SearchQuery;
 import backend.main.model.entity.MediaMetadata;
+import backend.main.model.entity.User;
+import backend.main.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,13 @@ import java.util.*;
 public class SearchController {
     private final Set<ISearchMediaService> searchMediaServices;
     private final IMediaSortService sortService;
+    private final UserRepository userRepository;
 
     @PostMapping("/search")
     public ResponseEntity<List<MediaMetadata>> search(@RequestBody SearchQuery searchQuery) {
-
+        User user = userRepository.findByToken(searchQuery.getUserToken());
         ISearchMediaService searchService = getSearchService(searchQuery.getFilter().getMediaType());
-        List<MediaMetadata> searchResults = searchService.search(searchQuery.getQuery(), searchQuery.getFilter());
+        List<MediaMetadata> searchResults = searchService.search(user, searchQuery.getQuery(), searchQuery.getFilter());
         List<MediaMetadata> sortResult = sortService.sort(searchResults, searchQuery.getSortMethod());
         return ResponseEntity.ok(sortResult);
     }
