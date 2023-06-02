@@ -9,4 +9,6 @@ public class UserAddDto {
     private String email;
     private String birthDate;
     private String token;
+    private String name;
+    private String profileImgUrl;
 }

@@ -21,4 +21,8 @@ public class User {
     private String token;
     @Column
     private String birthDate;
+    @Column
+    private String name;
+    @Column
+    private String profileImgUrl;
 }

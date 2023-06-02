@@ -20,6 +20,8 @@ public class UserController {
                 .email(userDto.getEmail())
                 .birthDate(userDto.getBirthDate())
                 .token(userDto.getToken())
+                .profileImgUrl(userDto.getName())
+                .name(userDto.getName())
                 .build();
 
         try {
