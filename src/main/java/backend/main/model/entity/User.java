@@ -12,6 +12,7 @@ import lombok.*;
 @Entity
 @Builder
 public class User {
+    @GeneratedValue(strategy=GenerationType.UUID)
     @Id
     private String id;
     @Column
@@ -20,4 +21,8 @@ public class User {
     private String token;
     @Column
     private String birthDate;
+    @Column
+    private String name;
+    @Column
+    private String profileImgUrl;
 }
