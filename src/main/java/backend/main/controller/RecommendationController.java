@@ -14,7 +14,7 @@ import java.util.*;
 public class RecommendationController {
 private final IRecommendationService iRecommendationService;
 
-    @PostMapping("/recommend")
+    @GetMapping("/recommend")
     public ResponseEntity<List<MediaMetadata>> processRecommendation(@RequestHeader("Token") String userToken) {
 
         List<MediaMetadata> response = iRecommendationService.recommend(userToken);

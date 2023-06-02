@@ -23,6 +23,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @Service
 public class RecommendationService implements IRecommendationService {
+    private final RestTemplate restTemplate;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final MusicRepository musicRepository;
@@ -83,10 +84,8 @@ public class RecommendationService implements IRecommendationService {
         headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
         HttpEntity<RecommendationRequest> requestEntity = new HttpEntity<>(request, headers);
 
-        RestTemplate restTemplate = new RestTemplate();
-
         // Send the HTTP request
-        String url = "http://localhost:8080/recommendations";
+        String url = "http://localhost:5000/api/similar_items";
         ResponseEntity<List<String>> response = restTemplate.exchange(
                 url, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<String>>() {
                 });
@@ -124,7 +123,7 @@ public class RecommendationService implements IRecommendationService {
     }
 
     @Override
-    public List<MediaMetadata> recommend(String userToken){
+    public List<MediaMetadata> recommend(String userToken) {
         RecommendationRequest request = findRequestBody(userToken);
         List<String> ids = httpRequest(request);
         return getMedia(ids);
