@@ -23,8 +23,8 @@ public class SearchController {
     private final UserRepository userRepository;
 
     @PostMapping("/search")
-    public ResponseEntity<List<MediaMetadata>> search(@RequestBody SearchQuery searchQuery) {
-        User user = userRepository.findByToken(searchQuery.getUserToken());
+    public ResponseEntity<List<MediaMetadata>> search(@RequestHeader("Token") String token, @RequestBody SearchQuery searchQuery) {
+        User user = userRepository.findByToken(token);
         ISearchMediaService searchService = getSearchService(searchQuery.getFilter().getMediaType());
         List<MediaMetadata> searchResults = searchService.search(user, searchQuery.getQuery(), searchQuery.getFilter());
         List<MediaMetadata> sortResult = sortService.sort(searchResults, searchQuery.getSortMethod());

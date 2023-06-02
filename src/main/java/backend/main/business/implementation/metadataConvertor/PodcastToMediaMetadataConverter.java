@@ -21,7 +21,7 @@ public class PodcastToMediaMetadataConverter implements IPodcastToMetadataConver
                     podcast.getId(),
                     "podcast",
                     podcast.getTitle(),
-                    null, // Set the image URL to null for podcasts
+                    "", // Set the image URL to null for podcasts
                     properties
             );
 
