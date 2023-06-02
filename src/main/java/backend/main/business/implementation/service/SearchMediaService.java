@@ -25,7 +25,7 @@
 //    private final MusicRepository musicRepository;
 //    private final PodcastRepository podcastRepository;
 //
-//    public List<MediaMetadata> search(SearchQuery searchQuery) {
+//    public List<MediaMetadata> getMediaMetadata(SearchQuery searchQuery) {
 //
 //        String filter = join(searchQuery.getFilter().getCategories());
 //

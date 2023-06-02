@@ -2,6 +2,7 @@ package backend.main.controller;
 
 import backend.main.business.interfaces.service.IMediaSortService;
 import backend.main.business.interfaces.service.ISearchMediaService;
+import backend.main.model.dto.MediaFilter;
 import backend.main.model.dto.MediaType;
 import backend.main.model.dto.SearchQuery;
 import backend.main.model.entity.MediaMetadata;
@@ -25,6 +26,12 @@ public class SearchController {
         List<MediaMetadata> searchResults = searchService.search(searchQuery.getQuery(), searchQuery.getFilter());
         List<MediaMetadata> sortResult = sortService.sort(searchResults, searchQuery.getSortMethod());
         return ResponseEntity.ok(sortResult);
+    }
+
+    @GetMapping("/search/filters")
+    public ResponseEntity<List<MediaFilter>> getSearchFilters() {
+        // todo list of genres of each media type
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     private ISearchMediaService getSearchService(MediaType mediaType) {

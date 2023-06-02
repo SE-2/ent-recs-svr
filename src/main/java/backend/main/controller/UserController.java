@@ -22,4 +22,11 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PatchMapping("/like/{mediaId}")
+    public ResponseEntity<Integer> likeMedia(@PathVariable String mediaId) {
+        // todo save like for media and return number of likes of media
+        int likesCount = 0;
+        return ResponseEntity.ok(likesCount);
+    }
 }
