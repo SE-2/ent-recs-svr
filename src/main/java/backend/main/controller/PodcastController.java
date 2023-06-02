@@ -1,6 +1,7 @@
 package backend.main.controller;
 
 import backend.main.business.interfaces.service.IPodcastService;
+import backend.main.business.interfaces.service.IUserVisitedItemService;
 import backend.main.model.entity.Podcast;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PodcastController {
     private final IPodcastService podcastService;
+    private final IUserVisitedItemService userVisitedItemService;
 
     @PostMapping("/podcasts")
     public ResponseEntity<String> importData(@RequestParam("podcast") MultipartFile file) {
@@ -24,10 +26,11 @@ public class PodcastController {
     }
 
     @GetMapping("/podcast/{podcastId}")
-    public ResponseEntity<Podcast> getPodcast(@PathVariable String podcastId) {
+    public ResponseEntity<Podcast> getPodcast(@RequestHeader("Token")String token, @PathVariable String podcastId) {
         Optional<Podcast> optionalPodcast = podcastService.findPodcast(podcastId);
         if (optionalPodcast.isPresent()) {
             Podcast podcast = optionalPodcast.get();
+            userVisitedItemService.saveItemVisited(podcast.getId(), token);
             return ResponseEntity.ok(podcast);
         } else {
             return ResponseEntity.notFound().build();

@@ -1,6 +1,7 @@
 package backend.main.controller;
 
 import backend.main.business.interfaces.service.IMusicService;
+import backend.main.business.interfaces.service.IUserVisitedItemService;
 import backend.main.model.entity.Music;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MusicController {
     private final IMusicService musicService;
+    private final IUserVisitedItemService userVisitedItemService;
 
     @PostMapping("/musics")
     public ResponseEntity<String> importData(@RequestParam("music") MultipartFile file) {
@@ -24,10 +26,11 @@ public class MusicController {
     }
 
     @GetMapping("/music/{musicId}")
-    public ResponseEntity<Music> getMusic(@PathVariable String musicId) {
+    public ResponseEntity<Music> getMusic(@RequestHeader("Token")String token, @PathVariable String musicId) {
         Optional<Music> optionalMusic = musicService.findMusic(musicId);
         if (optionalMusic.isPresent()) {
             Music music = optionalMusic.get();
+            userVisitedItemService.saveItemVisited(music.getId(), token);
             return ResponseEntity.ok(music);
         } else {
             return ResponseEntity.notFound().build();
