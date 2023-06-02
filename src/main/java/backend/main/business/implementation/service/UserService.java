@@ -19,7 +19,7 @@ public class UserService implements IUserService {
                 .email(userDto.getEmail())
                 .birthDate(userDto.getBirthDate())
                 .token(userDto.getToken())
-                .profileImgUrl(userDto.getName())
+                .profileImgUrl(userDto.getProfileImgUrl())
                 .name(userDto.getName())
                 .build();
 
