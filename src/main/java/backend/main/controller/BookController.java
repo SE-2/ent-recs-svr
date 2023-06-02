@@ -1,6 +1,7 @@
 package backend.main.controller;
 
 import backend.main.business.interfaces.service.IBookService;
+import backend.main.business.interfaces.service.IUserVisitedItemService;
 import backend.main.model.entity.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BookController {
     private final IBookService bookService;
+    private final IUserVisitedItemService userVisitedItemService;
 
     @PostMapping("/books")
     public ResponseEntity<String> importData(@RequestParam("book") MultipartFile file) {
@@ -24,10 +26,11 @@ public class BookController {
     }
 
     @GetMapping("/books/{bookId}")
-    public ResponseEntity<Book> getBook(@PathVariable String bookId) {
+    public ResponseEntity<Book> getBook(@RequestHeader("Token")String token, @PathVariable String bookId) {
         Optional<Book> optionalBook = bookService.findBook(bookId);
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
+            userVisitedItemService.saveItemVisited(book.getId(), token);
             return ResponseEntity.ok(book);
         } else {
             return ResponseEntity.notFound().build();

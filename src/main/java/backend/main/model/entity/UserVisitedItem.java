@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 public class UserVisitedItem {
     @Id
-    private String playlistID;
+    private String userID;
     @Column
     private String itemID;
 }

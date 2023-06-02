@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Like")
+@Table(name = "MediaLike")
 @Entity
 @Builder
 public class Like {
