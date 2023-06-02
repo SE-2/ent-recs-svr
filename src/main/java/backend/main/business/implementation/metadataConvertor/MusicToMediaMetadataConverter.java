@@ -21,13 +21,18 @@ public class MusicToMediaMetadataConverter implements IMusicToMetadataConvertor 
             Map<String, String> properties = new HashMap<>();
             properties.put("genre", String.valueOf(music.getAlbum()));
             properties.put("singer", String.valueOf(music.getArtist()));
-            properties.put("duration", String.valueOf(music.getDuration_ms()));
+            properties.put("duration", String.valueOf(formatDuration(music.getDuration_ms())));
+
+            String imageUrl = "";
+            if(music.getImageUrl() != null) {
+                imageUrl = music.getImageUrl();
+            }
 
             MediaMetadata mediaMetadata = new MediaMetadata(
                     music.getId(),
                     "music",
-                    music.getTitle(),
-                    music.getImageUrl(),
+                    music.getTrack(),
+                    imageUrl,
                     properties
             );
 
@@ -35,6 +40,13 @@ public class MusicToMediaMetadataConverter implements IMusicToMetadataConvertor 
         }
 
         return mediaMetadataList;
+    }
+
+    private static String formatDuration(float durationInMillis) {
+        long seconds = (long) durationInMillis / 1000;
+        long minutes = seconds / 60;
+        seconds = seconds % 60;
+        return String.format("%02d:%02d", minutes, seconds);
     }
 }
 
