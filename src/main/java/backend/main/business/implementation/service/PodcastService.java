@@ -29,4 +29,8 @@ public class PodcastService implements IPodcastService {
             e.printStackTrace();
         }
     }
+
+    public Optional<Podcast> findPodcast(String id) {
+        return podcastRepository.findById(id);
+    }
 }
