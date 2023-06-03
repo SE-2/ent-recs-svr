@@ -1,7 +1,3 @@
-Dockerfile
-
-Copy
-
 # Use the official OpenJDK image as the base
 FROM openjdk:17-alpine
 
