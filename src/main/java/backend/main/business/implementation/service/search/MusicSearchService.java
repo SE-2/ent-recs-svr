@@ -37,7 +37,7 @@ public class MusicSearchService implements ISearchMediaService {
 
     public String join(List<String> categories) {
         if (!categories.isEmpty())
-            return String.join(" OR ", categories);
+            return String.join(" AND ", categories);
         else return "";
     }
 }
