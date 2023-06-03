@@ -13,5 +13,7 @@ public interface MusicRepository extends ElasticsearchRepository<Music, String> 
 
     @Query("{\"bool\": {\"must\": [{\"multi_match\": {\"query\": \"?0\", \"type\": \"best_fields\"}}]}}")
     List<Music> searchMusics(String query, String filter);
-    List<Music> findAllById(List<String>Ids);
+
+    @Query("{\"bool\": {\"must\": {\"ids\": {\"values\": ?0}}}}")
+    List<Music> findByIdIn(List<String>Ids);
 }

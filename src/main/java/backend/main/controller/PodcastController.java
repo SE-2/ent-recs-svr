@@ -21,8 +21,8 @@ public class PodcastController {
     public ResponseEntity<String> importData(@RequestParam("podcast") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");
-        podcastService.importDataFromCSV(file);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully");
+        int savedCount = podcastService.importDataFromCSV(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
     @GetMapping("/podcast/{podcastId}")

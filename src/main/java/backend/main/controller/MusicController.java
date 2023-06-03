@@ -21,8 +21,8 @@ public class MusicController {
     public ResponseEntity<String> importData(@RequestParam("music") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");
-        musicService.importDataFromCSV(file);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully");
+        int savedCount = musicService.importDataFromCSV(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
     @GetMapping("/music/{musicId}")

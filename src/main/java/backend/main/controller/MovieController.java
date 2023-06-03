@@ -21,8 +21,8 @@ public class MovieController {
     public ResponseEntity<String> importData(@RequestParam("movie") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");
-        movieService.importDataFromCSV(file);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully");
+        int savedCount = movieService.importDataFromCSV(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
     @GetMapping("/movie/{movieId}")

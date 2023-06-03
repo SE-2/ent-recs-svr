@@ -1,6 +1,7 @@
 package backend.main.controller;
 
 import backend.main.business.interfaces.service.IRecommendationService;
+import backend.main.model.dto.MediaType;
 import backend.main.model.entity.MediaMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,10 @@ import java.util.*;
 public class RecommendationController {
 private final IRecommendationService iRecommendationService;
 
-    @GetMapping("/recommend")
-    public ResponseEntity<List<MediaMetadata>> processRecommendation(@RequestHeader("Token") String userToken) {
+    @PostMapping("/recommend")
+    public ResponseEntity<List<MediaMetadata>> processRecommendation(@RequestHeader("Token") String userToken, @RequestBody MediaType mediaType) {
 
-        List<MediaMetadata> response = iRecommendationService.recommend(userToken);
+        List<MediaMetadata> response = iRecommendationService.recommend(userToken, mediaType);
 
         return ResponseEntity.ok(response);
     }

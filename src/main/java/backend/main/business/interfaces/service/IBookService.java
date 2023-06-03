@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IBookService {
 
-    void importDataFromCSV(MultipartFile file);
+    int importDataFromCSV(MultipartFile file);
 
     Optional<Book> findBook(String id);
 }

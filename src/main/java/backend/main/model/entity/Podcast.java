@@ -11,6 +11,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 @Document(indexName = "podcast")
 public class Podcast {
     @Id
+    @Field(type = FieldType.Keyword, name = "id")
     private String id;
     @Field(type = FieldType.Text, name = "title")
     private String title;

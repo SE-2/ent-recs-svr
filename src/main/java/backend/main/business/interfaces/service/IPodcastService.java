@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IPodcastService {
 
-    void importDataFromCSV(MultipartFile file);
+    int importDataFromCSV(MultipartFile file);
 
     Optional<Podcast> findPodcast(String id);
 

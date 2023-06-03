@@ -21,8 +21,8 @@ public class BookController {
     public ResponseEntity<String> importData(@RequestParam("book") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");
-        bookService.importDataFromCSV(file);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully");
+        int savedCount = bookService.importDataFromCSV(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
     @GetMapping("/books/{bookId}")

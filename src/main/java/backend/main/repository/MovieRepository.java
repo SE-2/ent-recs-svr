@@ -16,5 +16,6 @@ public interface MovieRepository extends ElasticsearchRepository<Movie, String> 
     @Query("{\"bool\": {\"must\": [{\"multi_match\": {\"query\": \"?0\", \"type\": \"best_fields\"}}]}}")
     List<Movie> searchMoviesWithoutFilter(String query, String filter);
 
-    List<Movie> findAllById(List<String>Ids);
+    @Query("{\"bool\": {\"must\": {\"ids\": {\"values\": ?0}}}}")
+    List<Movie> findByIdIn(List<String>Ids);
 }

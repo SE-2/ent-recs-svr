@@ -17,6 +17,7 @@ public interface PodcastRepository extends ElasticsearchRepository<Podcast, Stri
     @Query("{\"bool\": {\"must\": [{\"multi_match\": {\"query\": \"?0\", \"type\": \"best_fields\"}}]}}")
     List<Podcast> searchPodcastsWithoutFilter(String query, String filter);
 
-    List<Podcast> findAllById(List<String>Ids);
+    @Query("{\"bool\": {\"must\": {\"ids\": {\"values\": ?0}}}}")
+    List<Podcast> findByIdIn(List<String>Ids);
 
 }

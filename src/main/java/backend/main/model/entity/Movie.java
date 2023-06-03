@@ -12,6 +12,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 public class Movie {
 
     @Id
+    @Field(type = FieldType.Keyword, name = "id")
     private String id;
 
     @Field(type = FieldType.Text, name = "poster_link")
