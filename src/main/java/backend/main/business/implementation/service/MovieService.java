@@ -20,14 +20,17 @@ public class MovieService implements IMovieService {
     private final IMovieDeserializer movieDeserializer;
     private final MovieRepository movieRepository;
 
-    public void importDataFromCSV(MultipartFile file) {
+    public int importDataFromCSV(MultipartFile file) {
+        int savedCount = 0;
         try {
             List<String[]> lines = fileParser.parse(file);
             List<Movie> movies = movieDeserializer.deserialize(lines);
             movieRepository.saveAll(movies);
+            savedCount = movies.size();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+        return savedCount;
     }
 
     @Override

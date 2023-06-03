@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -106,10 +107,10 @@ public class RecommendationService implements IRecommendationService {
 
 
         // Retrieve media metadata for each ID using your repository or service
-        List<Book> books = bookRepository.findAllById(mediaIds);
-        List<Movie> movies = movieRepository.findAllById(mediaIds);
-        List<Podcast> podcasts = podcastRepository.findAllById(mediaIds);
-        List<Music> musics = musicRepository.findAllById(mediaIds);
+        List<Book> books = bookRepository.findBooksByIdIn(mediaIds);
+        List<Movie> movies = movieRepository.findByIdIn(mediaIds);
+        List<Podcast> podcasts = podcastRepository.findByIdIn(mediaIds);
+        List<Music> musics = musicRepository.findByIdIn(mediaIds);
         if (!books.isEmpty())
             return bookToMediaMetadataConverter.convertToMediaMetadata(books);
         else if (!movies.isEmpty())
@@ -123,8 +124,9 @@ public class RecommendationService implements IRecommendationService {
     }
 
     @Override
-    public List<MediaMetadata> recommend(String userToken) {
+    public List<MediaMetadata> recommend(@RequestHeader("Token") String userToken, MediaType mediaType) {
         RecommendationRequest request = findRequestBody(userToken);
+        request.setMediaType(mediaType);
         List<String> ids = httpRequest(request);
         return getMedia(ids);
     }

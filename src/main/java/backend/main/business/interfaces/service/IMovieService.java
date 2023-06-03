@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IMovieService {
 
-    void importDataFromCSV(MultipartFile file);
+    int importDataFromCSV(MultipartFile file);
 
     Optional<Movie> findMovie(String id);
 }

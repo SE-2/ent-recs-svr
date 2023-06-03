@@ -11,6 +11,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 @Document(indexName = "music")
 public class Music {
     @Id
+    @Field(type = FieldType.Keyword, name = "id")
     private String id;
 
     @Field(type = FieldType.Text, name = "artist")
