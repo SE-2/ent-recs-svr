@@ -19,12 +19,12 @@ public class TrendMediaController {
 
     @GetMapping("/trends/today")
     public ResponseEntity<List<MediaMetadata>> getTodayTrendMedia() {
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(new ArrayList<>(trendMediaService.getTodayTrendMedia()));
     }
 
     @GetMapping("/trends/all")
     public ResponseEntity<List<MediaMetadata>> getAllTimesTrendMedia() {
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(new ArrayList<>(trendMediaService.getAllTimeTrendMedia()));
     }
 
 }
