@@ -1,4 +1,8 @@
-# Use the official OpenJDK image as the base image
+Dockerfile
+
+Copy
+
+# Use the official OpenJDK image as the base
 FROM openjdk:17-alpine
 
 # Set the working directory
@@ -8,6 +12,9 @@ WORKDIR /app
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
+
+# Give execute permissions to the mvnw file
+RUN chmod +x mvnw
 
 # Install dos2unix
 RUN apk update && apk add dos2unix
