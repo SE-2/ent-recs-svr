@@ -1,6 +1,6 @@
 package backend.main.business.interfaces.service;
 
-import backend.main.model.entity.PlaylistItem;
+import backend.main.model.entity.MediaMetadata;
 import backend.main.model.entity.Playlists;
 import backend.main.model.entity.User;
 
@@ -13,5 +13,5 @@ public interface IPlaylistsService {
 
     List<Playlists> getAllPlaylistsByUserId(String userId);
 
-    List<PlaylistItem> getPlaylistItems(String playlistId);
+    List<MediaMetadata> getPlaylistItems(String playlistId);
 }

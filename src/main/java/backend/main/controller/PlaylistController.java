@@ -3,14 +3,14 @@ package backend.main.controller;
 import backend.main.business.interfaces.service.IPlaylistsService;
 import backend.main.business.interfaces.service.IUserService;
 import backend.main.model.dto.CreatePlaylistDto;
-import backend.main.model.entity.PlaylistItem;
+import backend.main.model.entity.MediaMetadata;
 import backend.main.model.entity.Playlists;
 import backend.main.model.entity.User;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,9 +41,9 @@ public class PlaylistController {
     }
 
     @GetMapping("/playlist/items/{playlistID}")
-    public ResponseEntity<List<PlaylistItem>> showPlaylistItems(@RequestHeader("Token") String token, @PathVariable String playlistID) {
+    public ResponseEntity<List<MediaMetadata>> showPlaylistItems(@RequestHeader("Token") String token, @PathVariable String playlistID) {
         User user = userService.getUser(token);
-        List<PlaylistItem> items = playlistsService.getPlaylistItems(playlistID);
+        List<MediaMetadata> items = playlistsService.getPlaylistItems(playlistID);
         return ResponseEntity.ok().body(items);
     }
 }
