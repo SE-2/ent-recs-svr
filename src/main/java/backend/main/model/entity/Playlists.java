@@ -1,5 +1,6 @@
 package backend.main.model.entity;
 
+import io.swagger.models.auth.In;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,8 @@ import lombok.*;
 @Builder
 public class Playlists {
     @Id
-    private String playlistID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer playlistID;
     @Column
     private String userID;
     @Column
@@ -21,4 +23,14 @@ public class Playlists {
     private String creationDate;
     @Column
     private String lastVisitedItemID;
+    @Column
+    private String types;
+
+    public Playlists(String userID, String name, String creationDate, String lastVisitedItemID,String types) {
+        this.userID = userID;
+        this.name = name;
+        this.creationDate = creationDate;
+        this.lastVisitedItemID = lastVisitedItemID;
+        this.types = types;
+    }
 }
