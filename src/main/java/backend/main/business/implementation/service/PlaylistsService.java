@@ -25,8 +25,12 @@ public class PlaylistsService implements IPlaylistsService {
     }
 
     @Override
-    public void deletePlaylist(String playlistID) {
-        playlistsRepository.deleteById(playlistID);
+    public void deletePlaylist(String playlistID, User user) {
+        Playlists playlist = playlistsRepository.findByPlaylistIDAndUserID(playlistID, user.getId());
+        if (playlist == null) {
+            throw new RuntimeException("PlayList Not Found");
+        }
+        playlistsRepository.delete(playlist);
     }
 
     public List<Playlists> getAllPlaylistsByUserId(String userId) {

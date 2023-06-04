@@ -29,7 +29,7 @@ public class PlaylistController {
     @PostMapping("/playlist/delete/{playlistID}")
     public ResponseEntity<String> deletePlaylist(@RequestHeader("Token") String token, @PathVariable String playlistID) {
         User user = userService.getUser(token);
-        playlistsService.deletePlaylist(playlistID, User user);
+        playlistsService.deletePlaylist(playlistID, user);
         return ResponseEntity.ok().body("playlist deleted successfully! ");
 
     }
