@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserGetDto {
-    private String name;
-    private String profileImgUrl;
+public class CreatePlaylistDto {
+    String name;
+    String mediaTypes;
 }
