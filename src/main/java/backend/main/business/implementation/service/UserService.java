@@ -2,6 +2,7 @@ package backend.main.business.implementation.service;
 
 import backend.main.business.interfaces.service.IUserService;
 import backend.main.model.dto.UserAddDto;
+import backend.main.model.dto.UserGetDto;
 import backend.main.model.entity.User;
 import backend.main.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,11 @@ public class UserService implements IUserService {
 
         userRepository.save(user);
         return user.getId();
+    }
+
+    @Override
+    public UserGetDto getUser(String token) {
+        User user = userRepository.findByToken(token);
+        return new UserGetDto(user.getName(),user.getProfileImgUrl());
     }
 }
