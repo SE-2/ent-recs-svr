@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "FavoriteWriter")
+@Table(name = "FavoriteWriter",uniqueConstraints = {@UniqueConstraint(columnNames = {"userID", "writer"})})
 @Entity
 @Builder
 public class FavoriteWriter {

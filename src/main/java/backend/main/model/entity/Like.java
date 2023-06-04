@@ -1,5 +1,6 @@
 package backend.main.model.entity;
 
+import io.swagger.models.auth.In;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,11 +8,14 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "MediaLike")
+@Table(name = "MediaLike",uniqueConstraints = {@UniqueConstraint(columnNames = {"userID", "mediaID"})})
 @Entity
 @Builder
 public class Like {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private String userID;
     @Column
     private String mediaId;
