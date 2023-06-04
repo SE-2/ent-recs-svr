@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IMusicService {
 
-    void importDataFromCSV(MultipartFile file);
+    int importDataFromCSV(MultipartFile file);
 
     Optional<Music> findMusic(String id);
 }

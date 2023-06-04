@@ -20,14 +20,17 @@ public class PodcastService implements IPodcastService {
     private final IPodcastDeserializer podcastDeserializer;
     private final PodcastRepository podcastRepository;
 
-    public void importDataFromCSV(MultipartFile file) {
+    public int importDataFromCSV(MultipartFile file) {
+        int savedCount = 0;
         try {
             List<String[]> lines = fileParser.parse(file);
             List<Podcast> podcasts = podcastDeserializer.deserialize(lines);
             podcastRepository.saveAll(podcasts);
+            savedCount = podcasts.size();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+        return savedCount;
     }
 
     public Optional<Podcast> findPodcast(String id) {

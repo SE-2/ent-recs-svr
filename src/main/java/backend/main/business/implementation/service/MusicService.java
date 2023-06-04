@@ -21,14 +21,17 @@ public class MusicService implements IMusicService {
     private final IMusicDeserializer musicDeserializer;
     private final MusicRepository musicRepository;
 
-    public void importDataFromCSV(MultipartFile file) {
+    public int importDataFromCSV(MultipartFile file) {
+        int savedCount = 0;
         try {
             List<String[]> lines = fileParser.parse(file);
             List<Music> musics = musicDeserializer.deserialize(lines);
             musicRepository.saveAll(musics);
+            savedCount = musics.size();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+        return savedCount;
     }
 
     @Override

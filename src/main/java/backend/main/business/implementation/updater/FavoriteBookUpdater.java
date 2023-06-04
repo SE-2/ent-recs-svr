@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,7 +27,9 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
         List<String> allGenres = new ArrayList<>();
         List<String> allWriters = new ArrayList<>();
         for (Book book : books) {
-            allGenres.add(book.getGenre());
+            String[] genresArray = book.getGenre().split(",\\s*");
+            List<String> genres = Arrays.asList(genresArray);
+            allGenres.addAll(genres);
             allWriters.add(book.getName());
         }
         for (String genre : allGenres) {

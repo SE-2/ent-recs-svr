@@ -13,5 +13,4 @@ public class SearchQuery {
     private String query;
     private MediaFilter filter;
     private SortMethod sortMethod;
-    private String userToken;
 }

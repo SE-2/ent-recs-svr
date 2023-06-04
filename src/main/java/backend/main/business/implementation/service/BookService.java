@@ -21,14 +21,17 @@ public class BookService implements IBookService {
     private final IBookDeserializer bookDeserializer;
     private final BookRepository bookRepository;
 
-    public void importDataFromCSV(MultipartFile file) {
+    public int importDataFromCSV(MultipartFile file) {
+        int savedCount = 0;
         try {
             List<String[]> lines = fileParser.parse(file);
             List<Book> books = bookDeserializer.deserialize(lines);
-            bookRepository.saveAll(books);
+            Iterable<Book> savedBooks = bookRepository.saveAll(books);
+            savedCount = books.size();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+        return savedCount;
     }
 
     @Override

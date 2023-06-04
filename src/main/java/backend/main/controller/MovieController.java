@@ -21,11 +21,11 @@ public class MovieController {
     public ResponseEntity<String> importData(@RequestParam("movie") MultipartFile file) {
         if (file.isEmpty())
             return ResponseEntity.badRequest().body("No file selected");
-        movieService.importDataFromCSV(file);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully");
+        int savedCount = movieService.importDataFromCSV(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
-    @GetMapping("/movie/{movieId}")
+    @GetMapping("/movies/{movieId}")
     public ResponseEntity<Movie> getMovie(@RequestHeader("Token")String token, @PathVariable String movieId) {
         Optional<Movie> optionalMovie = movieService.findMovie(movieId);
         if (optionalMovie.isPresent()) {
