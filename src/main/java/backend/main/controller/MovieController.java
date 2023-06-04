@@ -25,7 +25,7 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
-    @GetMapping("/movie/{movieId}")
+    @GetMapping("/movies/{movieId}")
     public ResponseEntity<Movie> getMovie(@RequestHeader("Token")String token, @PathVariable String movieId) {
         Optional<Movie> optionalMovie = movieService.findMovie(movieId);
         if (optionalMovie.isPresent()) {
