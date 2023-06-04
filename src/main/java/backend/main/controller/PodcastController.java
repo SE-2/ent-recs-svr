@@ -25,7 +25,7 @@ public class PodcastController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
-    @GetMapping("/podcast/{podcastId}")
+    @GetMapping("/podcasts/{podcastId}")
     public ResponseEntity<Podcast> getPodcast(@RequestHeader("Token")String token, @PathVariable String podcastId) {
         Optional<Podcast> optionalPodcast = podcastService.findPodcast(podcastId);
         if (optionalPodcast.isPresent()) {
