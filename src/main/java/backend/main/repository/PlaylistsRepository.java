@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlaylistsRepository extends CrudRepository<Playlists, String> {
+public interface PlaylistsRepository extends CrudRepository<Playlists, Integer> {
 
-    Playlists findByPlaylistIDAndUserID(String playlistId, String userId);
+    Playlists findByPlaylistIDAndUserID(Integer playlistId, String userId);
 
-    List<Playlists> findByUserId(String userId);
+    List<Playlists> findByUserID(String userId);
 }

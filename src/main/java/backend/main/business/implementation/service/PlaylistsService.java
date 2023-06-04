@@ -36,7 +36,7 @@ public class PlaylistsService implements IPlaylistsService {
     }
 
     @Override
-    public void deletePlaylist(String playlistID, User user) {
+    public void deletePlaylist(Integer playlistID, User user) {
         Playlists playlist = playlistsRepository.findByPlaylistIDAndUserID(playlistID, user.getId());
         if (playlist == null) {
             throw new RuntimeException("PlayList Not Found");
@@ -45,7 +45,7 @@ public class PlaylistsService implements IPlaylistsService {
     }
 
     public List<Playlists> getAllPlaylistsByUserId(String userId) {
-        return playlistsRepository.findByUserId(userId);
+        return playlistsRepository.findByUserID(userId);
     }
 
     public List<MediaMetadata> getPlaylistItems(String playlistId) {
