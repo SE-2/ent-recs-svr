@@ -24,4 +24,11 @@ public class PlaylistController {
         return ResponseEntity.ok().body("playlist created successfully! ");
 
     }
+    @GetMapping("/deletePlaylist/{playlistID}")
+    public ResponseEntity<String> deletePlaylist(@RequestHeader("Token") String token, @PathVariable String playlistID) {
+        User user = iUserService.getUser(token);
+        iPlaylistsService.deletePlaylist(playlistID);
+        return ResponseEntity.ok().body("playlist deleted successfully! ");
+
+    }
 }

@@ -19,4 +19,9 @@ public class PlaylistsService implements IPlaylistsService {
         Playlists playlist = new Playlists(user.getId(), name, LocalDateTime.now().toString(), "",types);
         playlistsRepository.save(playlist);
     }
+
+    @Override
+    public void deletePlaylist(String playlistID) {
+        playlistsRepository.deleteById(playlistID);
+    }
 }

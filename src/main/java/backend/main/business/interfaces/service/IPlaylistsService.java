@@ -4,4 +4,6 @@ import backend.main.model.entity.User;
 
 public interface IPlaylistsService {
     void createPlaylist(User user, String name, String types);
+
+    void deletePlaylist(String playlistID);
 }
