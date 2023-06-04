@@ -1,6 +1,5 @@
 package backend.main.model.entity;
 
-import io.swagger.models.auth.In;
 import jakarta.persistence.*;
 import lombok.*;
 
