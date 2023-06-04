@@ -25,7 +25,7 @@ public class MusicController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Data imported successfully. " + savedCount);
     }
 
-    @GetMapping("/music/{musicId}")
+    @GetMapping("/musics/{musicId}")
     public ResponseEntity<Music> getMusic(@RequestHeader("Token")String token, @PathVariable String musicId) {
         Optional<Music> optionalMusic = musicService.findMusic(musicId);
         if (optionalMusic.isPresent()) {
