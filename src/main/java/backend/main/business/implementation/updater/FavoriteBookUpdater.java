@@ -34,7 +34,7 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
         }
         for (String genre : allGenres) {
             FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(),genre)
-                    .orElse(new FavoriteGenreBook(user.getId(), "", 0.0));
+                    .orElse(new FavoriteGenreBook(user.getId(), genre, 0.0));
 
             favoriteGenreBook.setRate(favoriteGenreBook.getRate() + 1);
 
@@ -47,6 +47,18 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
             favoriteWriter.setRate(favoriteWriter.getRate() + 1);
 
             favoriteWriterRepository.save(favoriteWriter);
+        }
+    }
+    @Override
+    public void updateBookGenres(List<String> genres, User user) {
+
+        for (String genre : genres) {
+            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(),genre)
+                    .orElse(new FavoriteGenreBook(user.getId(), genre, 0.0));
+
+            favoriteGenreBook.setRate(favoriteGenreBook.getRate() + 1);
+
+            favoriteGenreBookRepository.save(favoriteGenreBook);
         }
     }
 }

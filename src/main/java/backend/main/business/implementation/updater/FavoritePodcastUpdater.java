@@ -43,4 +43,16 @@ public class FavoritePodcastUpdater implements IFavoritePodcastUpdater {
             favoritePodcastProducerRepository.save(favoritePodcastProducer);
         }
     }
+    @Override
+    public void updatePodcastGenres(List<String> genres, User user) {
+
+        for (String genre : genres) {
+            FavoriteGenrePodcast favoriteGenrePodcast = favoriteGenrePodcastRepository.findByUserIDAndGenre(user.getId(), genre)
+                    .orElse(new FavoriteGenrePodcast(user.getId(), genre, 0.0));
+
+            favoriteGenrePodcast.setRate(favoriteGenrePodcast.getRate() + 1);
+
+            favoriteGenrePodcastRepository.save(favoriteGenrePodcast);
+        }
+    }
 }

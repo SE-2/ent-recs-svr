@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IFavoriteMovieUpdater {
     void updateMovieFavorites(List<Movie> movies, User user);
+    void updateMovieGenres(List<String> genres, User user);
 }

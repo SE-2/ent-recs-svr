@@ -1,12 +1,16 @@
 package backend.main.controller;
 
 import backend.main.business.interfaces.service.IUserService;
+import backend.main.business.interfaces.updater.IFavoriteBookUpdater;
 import backend.main.model.dto.*;
+import backend.main.model.entity.Music;
 import backend.main.model.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -26,7 +30,19 @@ public class UserController {
 
     @GetMapping("/getUser")
     public ResponseEntity<UserGetDto> getUser(@RequestHeader("Token") String token) {
-        UserGetDto user = userService.getUser(token);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        User user = userService.getUser(token);
+        UserGetDto user1 = new UserGetDto(user.getName(),user.getProfileImgUrl());
+        return new ResponseEntity<>(user1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/interests")
+    public ResponseEntity<String> updateInterests(@RequestHeader("Token")String token, @RequestBody UserFavoriteDto userFavoriteDto) {
+        try {
+        User user = userService.getUser(token);
+        userService.updateInterests(user,userFavoriteDto);
+            return ResponseEntity.ok().body("interests updated successfully");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body("something went wrong!");
+        }
     }
 }
