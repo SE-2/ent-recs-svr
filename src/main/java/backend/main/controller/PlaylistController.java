@@ -3,32 +3,47 @@ package backend.main.controller;
 import backend.main.business.interfaces.service.IPlaylistsService;
 import backend.main.business.interfaces.service.IUserService;
 import backend.main.model.dto.CreatePlaylistDto;
-import backend.main.model.entity.Music;
+import backend.main.model.entity.MediaMetadata;
+import backend.main.model.entity.Playlists;
 import backend.main.model.entity.User;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class PlaylistController {
-    private final IPlaylistsService iPlaylistsService;
-    private final IUserService iUserService;
+    private final IPlaylistsService playlistsService;
+    private final IUserService userService;
 
-    @GetMapping("/createPlaylist")
+    @PostMapping("/playlist/create")
     public ResponseEntity<String> createPlaylist(@RequestHeader("Token") String token, @RequestBody CreatePlaylistDto createPlaylistDto) {
-        User user = iUserService.getUser(token);
-        iPlaylistsService.createPlaylist(user, createPlaylistDto.getName(), createPlaylistDto.getMediaTypes());
+        User user = userService.getUser(token);
+        playlistsService.createPlaylist(user, createPlaylistDto.getName(), createPlaylistDto.getMediaTypes());
         return ResponseEntity.ok().body("playlist created successfully! ");
 
     }
-    @GetMapping("/deletePlaylist/{playlistID}")
+
+    @PostMapping("/playlist/delete/{playlistID}")
     public ResponseEntity<String> deletePlaylist(@RequestHeader("Token") String token, @PathVariable String playlistID) {
-        User user = iUserService.getUser(token);
-        iPlaylistsService.deletePlaylist(playlistID);
+        User user = userService.getUser(token);
+        playlistsService.deletePlaylist(playlistID, user);
         return ResponseEntity.ok().body("playlist deleted successfully! ");
 
+    }
+
+    @GetMapping("/playlist/show/all")
+    public ResponseEntity<List<Playlists>> showAllPlaylists(@RequestHeader("Token") String token) {
+        List<Playlists> playlists = playlistsService.getAllPlaylistsByUserId(token);
+        return ResponseEntity.ok().body(playlists);
+    }
+
+    @GetMapping("/playlist/items/{playlistID}")
+    public ResponseEntity<List<MediaMetadata>> showPlaylistItems(@RequestHeader("Token") String token, @PathVariable String playlistID) {
+        User user = userService.getUser(token);
+        List<MediaMetadata> items = playlistsService.getPlaylistItems(playlistID);
+        return ResponseEntity.ok().body(items);
     }
 }
