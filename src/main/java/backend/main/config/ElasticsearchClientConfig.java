@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
+import org.springframework.data.elasticsearch.client.erhlc.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.client.erhlc.RestClients;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 @Configuration
 public class ElasticsearchClientConfig {
@@ -23,5 +25,10 @@ public class ElasticsearchClientConfig {
                 .build();
 
         return RestClients.create(configuration).rest();
+    }
+
+    @Bean
+    public ElasticsearchOperations elasticsearchTemplate() {
+        return new ElasticsearchRestTemplate(client());
     }
 }
