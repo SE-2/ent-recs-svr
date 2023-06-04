@@ -10,6 +10,7 @@ import backend.main.model.dto.RecommendationRequest;
 import backend.main.model.entity.*;
 import backend.main.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +42,9 @@ public class RecommendationService implements IRecommendationService {
     private final MovieToMediaMetadataConverter movieToMediaMetadataConverter;
     private final MusicToMediaMetadataConverter musicToMediaMetadataConverter;
     private final PodcastToMediaMetadataConverter podcastToMediaMetadataConverter;
+
+    @Value("${ai.url}")
+    private String recommendationServiceUrl;
 
     @Override
     public RecommendationRequest findRequestBody(String userToken) {
@@ -86,9 +90,8 @@ public class RecommendationService implements IRecommendationService {
         HttpEntity<RecommendationRequest> requestEntity = new HttpEntity<>(request, headers);
 
         // Send the HTTP request
-        String url = "http://localhost:5000/api/similar_items";
         ResponseEntity<List<String>> response = restTemplate.exchange(
-                url, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<String>>() {
+                recommendationServiceUrl, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<String>>() {
                 });
 
         if (response.getStatusCode().is2xxSuccessful()) {
