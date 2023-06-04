@@ -65,4 +65,16 @@ public class FavoriteMovieUpdater implements IFavoriteMovieUpdater {
             favoriteActorRepository.save(favoriteActor);
         }
     }
+
+    @Override
+    public void updateMovieGenres(List<String> genres, User user) {
+        for (String genre : genres) {
+            FavoriteGenreMovie favoriteGenreMovie = favoriteGenreMovieRepository.findByUserIDAndGenre(user.getId(), genre)
+                    .orElse(new FavoriteGenreMovie(user.getId(), genre, 0.0));
+
+            favoriteGenreMovie.setRate(favoriteGenreMovie.getRate() + 1);
+
+            favoriteGenreMovieRepository.save(favoriteGenreMovie);
+        }
+    }
 }

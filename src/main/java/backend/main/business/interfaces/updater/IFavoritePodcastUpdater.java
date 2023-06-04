@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IFavoritePodcastUpdater {
     void updatePodcastFavorites(List<Podcast> podcasts, User user);
+    void updatePodcastGenres(List<String> genres, User user);
 }

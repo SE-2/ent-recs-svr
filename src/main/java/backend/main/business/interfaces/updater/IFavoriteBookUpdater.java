@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IFavoriteBookUpdater {
     void updateBookFavorites(List<Book> books, User user);
+    void updateBookGenres(List<String> genres, User user);
 }
