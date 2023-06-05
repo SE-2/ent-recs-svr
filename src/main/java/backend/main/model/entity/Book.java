@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "book")
+@Builder
 public class Book {
     @Id
     @Field(type = FieldType.Keyword, name = "id")

@@ -31,12 +31,6 @@ public class SearchController {
         return ResponseEntity.ok(sortResult);
     }
 
-    @GetMapping("/search/filters")
-    public ResponseEntity<List<MediaFilter>> getSearchFilters() {
-        // todo list of genres of each media type
-        return ResponseEntity.ok(new ArrayList<>());
-    }
-
     private ISearchMediaService getSearchService(MediaType mediaType) {
         return searchMediaServices.stream()
                 .filter(service -> service.type() == mediaType)
