@@ -23,4 +23,9 @@ public class PlaylistItemService implements IPlaylistItemService {
     public void deleteItemFromPlaylist(String userId, String mediaId) {
         playlistItemRepository.deleteByUserIDAndItemID(userId, mediaId);
     }
+
+    @Override
+    public boolean isBookmarked(String mediaId, String userId) {
+        return playlistItemRepository.findByItemIDAndUserID(mediaId, userId).isPresent();
+    }
 }
