@@ -11,16 +11,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
 @RequiredArgsConstructor
 @Component
 public class FavoritePodcastUpdater implements IFavoritePodcastUpdater {
     private final FavoriteGenrePodcastRepository favoriteGenrePodcastRepository;
     private final FavoritePodcastProducerRepository favoritePodcastProducerRepository;
+
     @Override
     public void updatePodcastFavorites(List<Podcast> podcasts, User user) {
         List<String> allProducers = new ArrayList<>();
         List<String> allGenres = new ArrayList<>();
-        for (Podcast podcast : podcasts) {
+        for (int i = 0; i < 3; i++) {
+            Podcast podcast = podcasts.get(i);
             allGenres.add(podcast.getGenre());
             allProducers.add(podcast.getProducer());
         }
@@ -43,6 +46,7 @@ public class FavoritePodcastUpdater implements IFavoritePodcastUpdater {
             favoritePodcastProducerRepository.save(favoritePodcastProducer);
         }
     }
+
     @Override
     public void updatePodcastGenres(List<String> genres, User user) {
 

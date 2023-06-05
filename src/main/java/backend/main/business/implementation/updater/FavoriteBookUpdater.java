@@ -26,14 +26,15 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
 
         List<String> allGenres = new ArrayList<>();
         List<String> allWriters = new ArrayList<>();
-        for (Book book : books) {
+        for (int i = 0; i < 3; i++) {
+            Book book = books.get(i);
             String[] genresArray = book.getGenre().split(",\\s*");
             List<String> genres = Arrays.asList(genresArray);
             allGenres.addAll(genres);
             allWriters.add(book.getName());
         }
         for (String genre : allGenres) {
-            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(),genre)
+            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(), genre)
                     .orElse(new FavoriteGenreBook(user.getId(), genre, 0.0));
 
             favoriteGenreBook.setRate(favoriteGenreBook.getRate() + 1);
@@ -49,11 +50,12 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
             favoriteWriterRepository.save(favoriteWriter);
         }
     }
+
     @Override
     public void updateBookGenres(List<String> genres, User user) {
 
         for (String genre : genres) {
-            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(),genre)
+            FavoriteGenreBook favoriteGenreBook = favoriteGenreBookRepository.findByUserIDAndGenre(user.getId(), genre)
                     .orElse(new FavoriteGenreBook(user.getId(), genre, 0.0));
 
             favoriteGenreBook.setRate(favoriteGenreBook.getRate() + 1);
