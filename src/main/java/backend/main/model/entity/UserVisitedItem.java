@@ -7,19 +7,20 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "UserVisitedItem",uniqueConstraints = {@UniqueConstraint(columnNames = {"userID", "mediaID", "date", "time"})})
+@Table(name = "UserVisitedItem")
 @Entity
 @Builder
+@IdClass(UserVisitedItemId.class)
 public class UserVisitedItem {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
-    @Column
     private String userID;
-    @Column
+    @Id
+    @Column(length = 20)
     private String itemID;
-    @Column
+    @Id
+    @Column(length = 20)
     private String date;
-    @Column
+    @Id
+    @Column(length = 20)
     private String time;
 }

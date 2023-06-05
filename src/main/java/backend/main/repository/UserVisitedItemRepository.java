@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface UserVisitedItemRepository extends CrudRepository<UserVisitedItem, String> {
 
-    List<UserVisitedItem> findByUserIdOrderByDateDescTimeDesc(String userID);
+    List<UserVisitedItem> findByUserIDOrderByDateDescTimeDesc(String userID);
 }

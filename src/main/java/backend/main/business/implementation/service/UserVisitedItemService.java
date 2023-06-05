@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -46,13 +44,13 @@ public class UserVisitedItemService implements IUserVisitedItemService {
     @Override
     public List<MediaMetadata> getRecentVisitedItems(String token) {
         String userID = findUserID(token);
-        List<UserVisitedItem> visitedItems = userVisitedItemRepository.findByUserIdOrderByDateDescTimeDesc(userID);
+        List<UserVisitedItem> visitedItems = userVisitedItemRepository.findByUserIDOrderByDateDescTimeDesc(userID);
 
         List<Book> books = new ArrayList<>();
         List<Movie> movies = new ArrayList<>();
         List<Music> musics = new ArrayList<>();
         List<Podcast> podcasts = new ArrayList<>();
-        List<MediaMetadata> res = new ArrayList<>();
+        ArrayList<MediaMetadata> res = new ArrayList<>();
 
         for (UserVisitedItem x: visitedItems) {
             MediaMetadata temp = null;
@@ -81,10 +79,22 @@ public class UserVisitedItemService implements IUserVisitedItemService {
                 temp = list.get(0);
                 podcasts.clear();
             }
-            if (temp != null) res.add(temp);
+            if (temp != null && !checkDup(temp,res)) res.add(temp);
+            if (res.size() == 20) break;
         }
 
         return res;
+    }
+
+    private boolean checkDup(MediaMetadata media, ArrayList<MediaMetadata> list) {
+        boolean flag = false;
+        for (MediaMetadata x:list) {
+            if (x.getMediaId().equals(media.getMediaId())) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 
     public String findUserID(String token) {
