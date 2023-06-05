@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 
+import javax.print.attribute.standard.Media;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -147,7 +148,7 @@ public class RecommendationServiceTest {
 
         when(bookToMediaMetadataConverter.convertToMediaMetadata(books)).thenReturn(expectedMetadata);
 
-        List<MediaMetadata> actualMetadata = recommendationService.getMedia(mediaIds);
+        List<MediaMetadata> actualMetadata = recommendationService.getMedia(MediaType.BOOK,mediaIds);
 
         assertEquals(expectedMetadata, actualMetadata);
     }
