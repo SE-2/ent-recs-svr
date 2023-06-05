@@ -46,4 +46,12 @@ public class PlaylistController {
         List<MediaMetadata> items = playlistsService.getPlaylistItems(playlistID);
         return ResponseEntity.ok().body(items);
     }
+
+    @PostMapping("/playlist/edit/{playlistID}")
+    public ResponseEntity<String> editPlaylist(@RequestHeader("Token") String token, @PathVariable String playlistID, @RequestBody CreatePlaylistDto createPlaylistDto) {
+        User user = userService.getUser(token);
+        playlistsService.editPlaylist(user, createPlaylistDto.getName(), createPlaylistDto.getMediaTypes(), playlistID);
+        return ResponseEntity.ok().body("playlist edited successfully! ");
+
+    }
 }
