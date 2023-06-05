@@ -54,7 +54,7 @@ public class PlaylistsServiceTest {
         playlist.setPlaylistID(playlistId);
         playlist.setUserID(user.getId());
 
-        when(playlistsRepository.findByPlaylistIDAndUserID(playlistId, user.getId())).thenReturn(playlist);
+        when(playlistsRepository.findByPlaylistIDAndUserID(playlistId, user.getId())).thenReturn(Optional.of(playlist));
 
         playlistsService.deletePlaylist(playlistId, user);
 
