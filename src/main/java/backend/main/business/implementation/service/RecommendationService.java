@@ -10,6 +10,7 @@ import backend.main.model.dto.RecommendationRequest;
 import backend.main.model.entity.*;
 import backend.main.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -105,25 +106,28 @@ public class RecommendationService implements IRecommendationService {
     }
 
     @Override
-    public List<MediaMetadata> getMedia(List<String> mediaIds) {
-        List<MediaMetadata> mediaMetadataList = new ArrayList<>();
+    public List<MediaMetadata> getMedia(MediaType mediaType, List<String> mediaIds) {
 
+        switch (mediaType) {
+            case MUSIC -> {
+                List<Music> musics = musicRepository.findByIdIn(mediaIds);
+                return musicToMediaMetadataConverter.convertToMediaMetadata(musics);
+            }
+            case MOVIE -> {
+                List<Movie> movies = movieRepository.findByIdIn(mediaIds);
+                return movieToMediaMetadataConverter.convertToMediaMetadata(movies);
+            }
+            case BOOK -> {
+                List<Book> books = bookRepository.findBooksByIdIn(mediaIds);
+                return bookToMediaMetadataConverter.convertToMediaMetadata(books);
+            }
+            case PODCAST -> {
+                List<Podcast> podcasts = podcastRepository.findByIdIn(mediaIds);
+                return podcastToMediaMetadataConverter.convertToMediaMetadata(podcasts);
+            }
+        }
 
-        // Retrieve media metadata for each ID using your repository or service
-        List<Book> books = bookRepository.findBooksByIdIn(mediaIds);
-        List<Movie> movies = movieRepository.findByIdIn(mediaIds);
-        List<Podcast> podcasts = podcastRepository.findByIdIn(mediaIds);
-        List<Music> musics = musicRepository.findByIdIn(mediaIds);
-        if (!books.isEmpty())
-            return bookToMediaMetadataConverter.convertToMediaMetadata(books);
-        else if (!movies.isEmpty())
-            return movieToMediaMetadataConverter.convertToMediaMetadata(movies);
-        else if (!podcasts.isEmpty())
-            return podcastToMediaMetadataConverter.convertToMediaMetadata(podcasts);
-        else if (!musics.isEmpty())
-            return musicToMediaMetadataConverter.convertToMediaMetadata(musics);
-        else
-            return null;
+        throw new NotImplementedException(mediaType.name());
     }
 
     @Override
@@ -131,6 +135,6 @@ public class RecommendationService implements IRecommendationService {
         RecommendationRequest request = findRequestBody(userToken);
         request.setMediaType(mediaType);
         List<String> ids = httpRequest(request);
-        return getMedia(ids);
+        return getMedia(mediaType, ids);
     }
 }

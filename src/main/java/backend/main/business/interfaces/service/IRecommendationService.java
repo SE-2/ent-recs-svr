@@ -9,6 +9,6 @@ import java.util.List;
 public interface IRecommendationService {
     RecommendationRequest findRequestBody(String userToken);
     List<String> httpRequest(RecommendationRequest recommendationRequest);
-    List<MediaMetadata> getMedia(List<String> mediaIds);
+    List<MediaMetadata> getMedia(MediaType mediaType, List<String> mediaIds);
     List<MediaMetadata> recommend(String userToken, MediaType mediaType);
 }
