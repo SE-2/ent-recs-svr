@@ -37,8 +37,8 @@ public class UserService implements IUserService {
                 .profileImgUrl(userDto.getProfileImgUrl())
                 .name(userDto.getName())
                 .build();
-
-        userRepository.save(user);
+        if (userRepository.findByToken(userDto.getToken()) == null)
+            userRepository.save(user);
         return user.getId();
     }
 

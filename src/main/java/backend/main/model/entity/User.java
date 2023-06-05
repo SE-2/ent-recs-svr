@@ -17,7 +17,7 @@ public class User {
     private String id;
     @Column
     private String email;
-    @Column(unique = true)
+    @Column
     private String token;
     @Column
     private String birthDate;
