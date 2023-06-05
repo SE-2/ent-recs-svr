@@ -42,6 +42,7 @@ public class PlaylistsService implements IPlaylistsService {
             Playlists pl = playlist.get();
             pl.setName(name);
             pl.setTypes(types);
+            playlistsRepository.save(pl);
         } else throw new RuntimeException("Playlist Not fount to edit");
     }
 
