@@ -46,11 +46,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/isFilled/{mediaType}")
-    public ResponseEntity<Boolean> updateInterests(@RequestHeader("Token") String token, @PathVariable String mediaType) {
+    @GetMapping("/interests/submitted/{mediaType}")
+    public ResponseEntity<Boolean> updateInterests(@RequestHeader("Token") String token, @PathVariable MediaType mediaType) {
         boolean getFilled;
         User user = userService.getUser(token);
-        getFilled = userService.getFilled(user, MediaType.valueOf(mediaType));
+        getFilled = userService.getFilled(user, mediaType);
         return ResponseEntity.ok(getFilled);
 
     }
