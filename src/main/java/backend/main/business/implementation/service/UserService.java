@@ -63,7 +63,7 @@ public class UserService implements IUserService {
             userRepository.save(user);
         } else if (userFavoriteDto.getMediaType().equals(MediaType.MOVIE)) {
             iFavoriteMovieUpdater.updateMovieGenres(userFavoriteDto.getGenres(), user);
-            user.setMusic(true);
+            user.setMovie(true);
             userRepository.save(user);
         } else if (userFavoriteDto.getMediaType().equals(MediaType.PODCAST)) {
             iFavoritePodcastUpdater.updatePodcastGenres(userFavoriteDto.getGenres(), user);

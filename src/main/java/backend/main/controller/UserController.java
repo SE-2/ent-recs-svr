@@ -42,7 +42,7 @@ public class UserController {
             userService.updateInterests(user, userFavoriteDto);
             return ResponseEntity.ok().body("interests updated successfully");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("something went wrong!");
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
