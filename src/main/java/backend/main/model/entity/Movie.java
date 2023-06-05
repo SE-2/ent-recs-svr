@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "movie")
+@Builder
 public class Movie {
 
     @Id

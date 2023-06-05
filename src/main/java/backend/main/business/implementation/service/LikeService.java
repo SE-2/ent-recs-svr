@@ -29,7 +29,7 @@ public class LikeService implements ILikeService {
 
         return likeRepository.countByMediaId(mediaId);
     }
-
+    @Override
     public String findUserID(String token) {
         User user = userRepository.findByToken(token);
         return user.getId();
