@@ -36,7 +36,8 @@ public class PlaylistController {
 
     @GetMapping("/playlist/show/all")
     public ResponseEntity<List<Playlists>> showAllPlaylists(@RequestHeader("Token") String token) {
-        List<Playlists> playlists = playlistsService.getAllPlaylistsByUserId(token);
+        User user = userService.getUser(token);
+        List<Playlists> playlists = playlistsService.getAllPlaylistsByUserId(user.getId());
         return ResponseEntity.ok().body(playlists);
     }
 

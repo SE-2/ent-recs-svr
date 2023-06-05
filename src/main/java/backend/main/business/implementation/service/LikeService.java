@@ -34,4 +34,10 @@ public class LikeService implements ILikeService {
         User user = userRepository.findByToken(token);
         return user.getId();
     }
+
+    @Override
+    public boolean isLiked(String mediaId, String token) {
+        String userId = findUserID(token);
+        return likeRepository.findByMediaIdAndUserID(mediaId, userId).isPresent();
+    }
 }
