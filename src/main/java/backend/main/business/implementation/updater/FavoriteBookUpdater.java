@@ -26,7 +26,7 @@ public class FavoriteBookUpdater implements IFavoriteBookUpdater {
 
         List<String> allGenres = new ArrayList<>();
         List<String> allWriters = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < Math.min(3, books.size()); i++) {
             Book book = books.get(i);
             String[] genresArray = book.getGenre().split(",\\s*");
             List<String> genres = Arrays.asList(genresArray);

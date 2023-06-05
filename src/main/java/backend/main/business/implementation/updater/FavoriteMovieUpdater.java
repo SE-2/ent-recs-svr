@@ -25,7 +25,7 @@ public class FavoriteMovieUpdater implements IFavoriteMovieUpdater {
         List<String> allGenres = new ArrayList<>();
         List<String> allDirectors = new ArrayList<>();
         List<String> allActors = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < Math.min(3, movies.size()); i++) {
             Movie movie = movies.get(i);
             String[] genresArray = movie.getGenre().split(",\\s*");
             List<String> genres = Arrays.asList(genresArray);

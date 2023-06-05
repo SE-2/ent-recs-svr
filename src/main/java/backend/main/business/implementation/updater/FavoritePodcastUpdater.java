@@ -22,7 +22,7 @@ public class FavoritePodcastUpdater implements IFavoritePodcastUpdater {
     public void updatePodcastFavorites(List<Podcast> podcasts, User user) {
         List<String> allProducers = new ArrayList<>();
         List<String> allGenres = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < Math.min(3, podcasts.size()); i++) {
             Podcast podcast = podcasts.get(i);
             allGenres.add(podcast.getGenre());
             allProducers.add(podcast.getProducer());
