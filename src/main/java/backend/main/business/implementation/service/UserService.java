@@ -36,6 +36,10 @@ public class UserService implements IUserService {
                 .token(userDto.getToken())
                 .profileImgUrl(userDto.getProfileImgUrl())
                 .name(userDto.getName())
+                .book(false)
+                .movie(false)
+                .podcast(false)
+                .music(false)
                 .build();
         if (userRepository.findByToken(userDto.getToken()) == null)
             userRepository.save(user);
@@ -49,13 +53,34 @@ public class UserService implements IUserService {
 
     @Override
     public void updateInterests(User user, UserFavoriteDto userFavoriteDto) {
-        if (userFavoriteDto.getMediaType().equals(MediaType.BOOK))
+        if (userFavoriteDto.getMediaType().equals(MediaType.BOOK)) {
             iFavoriteBookUpdater.updateBookGenres(userFavoriteDto.getGenres(), user);
-        else if (userFavoriteDto.getMediaType().equals(MediaType.MUSIC))
+            user.setBook(true);
+            userRepository.save(user);
+        } else if (userFavoriteDto.getMediaType().equals(MediaType.MUSIC)) {
             iFavoriteMusicUpdater.updateMusicGenres(userFavoriteDto.getGenres(), user);
-        else if (userFavoriteDto.getMediaType().equals(MediaType.MOVIE))
+            user.setMusic(true);
+            userRepository.save(user);
+        } else if (userFavoriteDto.getMediaType().equals(MediaType.MOVIE)) {
             iFavoriteMovieUpdater.updateMovieGenres(userFavoriteDto.getGenres(), user);
-        else if (userFavoriteDto.getMediaType().equals(MediaType.PODCAST))
+            user.setMusic(true);
+            userRepository.save(user);
+        } else if (userFavoriteDto.getMediaType().equals(MediaType.PODCAST)) {
             iFavoritePodcastUpdater.updatePodcastGenres(userFavoriteDto.getGenres(), user);
+            user.setPodcast(true);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public boolean getFilled(User user, MediaType mediaType) {
+        if (mediaType.equals(MediaType.BOOK))
+            return user.getBook();
+        else if (mediaType.equals(MediaType.PODCAST))
+            return user.getPodcast();
+        else if (mediaType.equals(MediaType.MOVIE))
+            return user.getMovie();
+        else
+            return user.getMusic();
     }
 }

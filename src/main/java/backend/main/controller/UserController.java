@@ -31,18 +31,27 @@ public class UserController {
     @GetMapping("/getUser")
     public ResponseEntity<UserGetDto> getUser(@RequestHeader("Token") String token) {
         User user = userService.getUser(token);
-        UserGetDto user1 = new UserGetDto(user.getName(),user.getProfileImgUrl());
+        UserGetDto user1 = new UserGetDto(user.getName(), user.getProfileImgUrl());
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
 
-    @GetMapping("/interests")
-    public ResponseEntity<String> updateInterests(@RequestHeader("Token")String token, @RequestBody UserFavoriteDto userFavoriteDto) {
+    @PostMapping("/interests")
+    public ResponseEntity<String> updateInterests(@RequestHeader("Token") String token, @RequestBody UserFavoriteDto userFavoriteDto) {
         try {
-        User user = userService.getUser(token);
-        userService.updateInterests(user,userFavoriteDto);
+            User user = userService.getUser(token);
+            userService.updateInterests(user, userFavoriteDto);
             return ResponseEntity.ok().body("interests updated successfully");
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("something went wrong!");
         }
+    }
+
+    @GetMapping("/isFilled/{mediaType}")
+    public ResponseEntity<Boolean> updateInterests(@RequestHeader("Token") String token, @PathVariable String mediaType) {
+        boolean getFilled;
+        User user = userService.getUser(token);
+        getFilled = userService.getFilled(user, MediaType.valueOf(mediaType));
+        return ResponseEntity.ok(getFilled);
+
     }
 }
