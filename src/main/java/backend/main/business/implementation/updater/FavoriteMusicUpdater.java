@@ -18,7 +18,8 @@ public class FavoriteMusicUpdater implements IFavoriteMusicUpdater {
     @Override
     public void updateMusicFavorites(List<Music> musics, User user) {
         List<String> allSingers = new ArrayList<>();
-        for (Music music : musics) {
+        for (int i = 0; i < 3; i++) {
+            Music music = musics.get(i);
             allSingers.add(music.getArtist());
         }
 
