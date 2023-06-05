@@ -14,4 +14,6 @@ public interface IPlaylistsService {
     List<Playlists> getAllPlaylistsByUserId(String userId);
 
     List<MediaMetadata> getPlaylistItems(String playlistId);
+
+    void editPlaylist(User user, String name, String types, String playlistID);
 }

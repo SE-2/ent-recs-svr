@@ -36,12 +36,22 @@ public class PlaylistsService implements IPlaylistsService {
     }
 
     @Override
+    public void editPlaylist(User user, String name, String types, String playlistID) {
+        Optional<Playlists> playlist = playlistsRepository.findByPlaylistIDAndUserID(Integer.valueOf(playlistID),user.getId());
+        if (playlist.isPresent()) {
+            Playlists pl = playlist.get();
+            pl.setName(name);
+            pl.setTypes(types);
+        } else throw new RuntimeException("Playlist Not fount to edit");
+    }
+
+    @Override
     public void deletePlaylist(Integer playlistID, User user) {
-        Playlists playlist = playlistsRepository.findByPlaylistIDAndUserID(playlistID, user.getId());
-        if (playlist == null) {
+        Optional<Playlists> playlist = playlistsRepository.findByPlaylistIDAndUserID(playlistID, user.getId());
+        if (playlist.isEmpty()) {
             throw new RuntimeException("PlayList Not Found");
         }
-        playlistsRepository.delete(playlist);
+        playlistsRepository.delete(playlist.get());
     }
 
     public List<Playlists> getAllPlaylistsByUserId(String userId) {
