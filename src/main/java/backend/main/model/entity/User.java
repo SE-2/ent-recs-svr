@@ -25,4 +25,12 @@ public class User {
     private String name;
     @Column
     private String profileImgUrl;
+    @Column
+    private Boolean movie;
+    @Column
+    private Boolean music;
+    @Column
+    private Boolean book;
+    @Column
+    private Boolean podcast;
 }
